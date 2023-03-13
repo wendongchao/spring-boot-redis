@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-@EnableKnife4j
+@EnableKnife4j// http://localhost:8080/doc.html显示页面
 public class Swagger2Config {
     @Bean
     public Docket createRestApi(){

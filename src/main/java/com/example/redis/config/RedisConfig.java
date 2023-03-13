@@ -37,10 +37,10 @@ public class RedisConfig extends CachingConfigurerSupport {
         RedisSerializer<Object> serializer = redisSerializer();
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(serializer);
-        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(serializer);
+        redisTemplate.setKeySerializer(new StringRedisSerializer());// 对key使用String序列化方式
+        redisTemplate.setValueSerializer(serializer);// 对value采用序列化器，序列化方式
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());// 对hashkey使用String序列化方式
+        redisTemplate.setHashValueSerializer(serializer);// 对hashValue采用序列化器，序列化方式
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
@@ -56,6 +56,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         return serializer;
     }
 
+    // 缓存管理器
     @Bean
     public RedisCacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
